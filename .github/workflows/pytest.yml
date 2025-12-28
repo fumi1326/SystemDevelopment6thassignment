@@ -1,0 +1,27 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    [cite_start]runs-on: ubuntu-latest [cite: 361]
+    steps:
+      - [cite_start]name: Checkout code [cite: 366]
+        uses: actions/checkout@v4
+
+      - [cite_start]name: Set up Python [cite: 368]
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - [cite_start]name: Install dependencies [cite: 371]
+        run: |
+          pip install pytest [cite: 380]
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi [cite: 381]
+
+      - [cite_start]name: Run tests [cite: 382]
+        [cite_start]run: pytest tests/ -v [cite: 383]

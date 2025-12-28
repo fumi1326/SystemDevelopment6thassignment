@@ -1,0 +1,26 @@
+name: Measure Coverage
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        [cite_start]run: pip install pytest pytest-cov [cite: 509]
+      
+      - [cite_start]name: Run tests with coverage [cite: 511]
+        [cite_start]run: pytest tests/ --cov=src --cov-report=html [cite: 513]
+        
+      - [cite_start]name: Upload coverage HTML report [cite: 514]
+        [cite_start]uses: actions/upload-artifact@v4 [cite: 515]
+        [cite_start]if: always() [cite: 516]
+        with:
+          name: coverage-report
+          [cite_start]path: htmlcov/ [cite: 518]
